@@ -37,3 +37,11 @@ def generate_feedback(input_log, output_log):
     )
     # レスポンスを返す
     return res["choices"][0]["message"]["content"]
+
+"""
+if __name__ == "__main__":
+    print(generate_feedback(
+        ["こんにちは", "元気ですか？", "私は元気です", "それはよかったですね", "私も元気です"],
+        ["元気です", "それはよかったですね", "私も元気です", "元気です", "それはよかったですね"]
+    ))
+"""
