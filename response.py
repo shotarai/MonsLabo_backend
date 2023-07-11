@@ -11,7 +11,7 @@ openai.api_key = OPENAI_API_KEY
 def generate_response(name, age, sex, hobby, race, input_log, output_log, num_response):
     # 1回目のレスポンス生成
     if num_response == 0:
-        # ChatGPTに対するプロンプト指定
+        # ChatGPTに対するプロンプトの設定
         res = openai.ChatCompletion.create(
             model="gpt-3.5-turbo",
             messages=[
