@@ -43,4 +43,3 @@ def return_response(info: Info):
         info.output_log,
         info.num_response
     )
-
