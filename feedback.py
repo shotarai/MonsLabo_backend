@@ -96,7 +96,10 @@ def generate_feedback(name, age, sex, hobby, race, input_log, output_log):
             {   
                 "role": "user",
                 "content": f"""
-                            私と{name}のここまでの会話から、あなたに関する情報と私に対する印象を教えてください。
+                            ユーザと{name}のここまでの会話から、以下の質問について答えてください。
+                            
+                            -ユーザの会話の中で真似した部分を教えてください。
+                            -ユーザに対する印象を教えてください。
                             """
             }
         ]
