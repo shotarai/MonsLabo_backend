@@ -8,7 +8,7 @@ OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
 openai.api_key = OPENAI_API_KEY
 
 #
-def generate_feedback(name, age, sex, hobby, race, input_log, output_log):
+def generate_answer(name, age, sex, hobby, race, input_log, output_log):
     # ChatGPTに対するプロンプトの設定
     res = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
@@ -88,12 +88,7 @@ def generate_feedback(name, age, sex, hobby, race, input_log, output_log):
             },
             {   
                 "role": "user",
-                "content": f"""
-                            ユーザと{name}のここまでの会話から、以下の質問について答えてください。
-                            
-                            -ユーザの会話の中で真似した部分を教えてください。
-                            -ユーザに対する印象を教えてください。
-                            """
+                "content": f"{input_log[5]}"
             }
         ]
     )

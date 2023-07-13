@@ -4,6 +4,7 @@ from pydantic import BaseModel
 
 from response import generate_response
 from feedback import generate_feedback
+from answer import generate_answer
 
 app = FastAPI()
 
@@ -61,6 +62,20 @@ def return_response(info: Info):
 def return_feedback(log: Log):
     # 
     return generate_feedback(
+        log.name,
+        log.age,
+        log.sex,
+        log.hobby,
+        log.race,
+        log.input_log,
+        log.output_log,
+    )
+
+# 会話のログから一問一答を生成
+@add.post('/answer')
+def return_answer(log: Log):
+    #
+    return generate_answer(
         log.name,
         log.age,
         log.sex,
