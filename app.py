@@ -28,6 +28,11 @@ class Info(BaseModel):
 
 # モンスターとの会話ログ
 class Log(BaseModel):
+    name: str
+    age: int
+    sex: str
+    hobby: str
+    race: str
     input_log: list
     output_log: list
 
@@ -56,6 +61,11 @@ def return_response(info: Info):
 def return_feedback(log: Log):
     # 
     return generate_feedback(
+        log.name,
+        log.age,
+        log.sex,
+        log.hobby,
+        log.race,
         log.input_log,
-        log.output_log
+        log.output_log,
     )
