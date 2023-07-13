@@ -72,7 +72,7 @@ def return_feedback(log: Log):
     )
 
 # 会話のログから一問一答を生成
-@add.post('/answer')
+@app.post('/answer')
 def return_answer(log: Log):
     #
     return generate_answer(
