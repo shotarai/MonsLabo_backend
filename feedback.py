@@ -22,7 +22,7 @@ def generate_feedback(input_log, output_log):
                 "role": "system",
                 "content": f"""
                             与えられた私とあなたの会話履歴をもとに、
-                            あなたに関する情報と私に対する情報を伝えてください。
+                            あなたに関する情報と私に対する印象を伝えてください。
                             """
             },
             {
@@ -40,8 +40,5 @@ def generate_feedback(input_log, output_log):
 
 """
 if __name__ == "__main__":
-    print(generate_feedback(
-        ["こんにちは", "元気ですか？", "私は元気です", "それはよかったですね", "私も元気です"],
-        ["元気です", "それはよかったですね", "私も元気です", "元気です", "それはよかったですね"]
-    ))
+    pass
 """
