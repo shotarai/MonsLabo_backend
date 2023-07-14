@@ -37,6 +37,17 @@ class Log(BaseModel):
     input_log: list
     output_log: list
 
+#
+class Info2(BaseModel):
+    name: str
+    age: int
+    sex: str
+    hobby: str
+    race: str
+    input_log: list
+    output_log: list
+    new_num_response: int
+
 # テスト
 @app.get('/')
 def test():
@@ -73,14 +84,15 @@ def return_feedback(log: Log):
 
 # 会話のログから一問一答を生成
 @app.post('/answer')
-def return_answer(log: Log):
+def return_answer(info2: Info2):
     #
     return generate_answer(
-        log.name,
-        log.age,
-        log.sex,
-        log.hobby,
-        log.race,
-        log.input_log,
-        log.output_log,
+        info2.name,
+        info2.age,
+        info2.sex,
+        info2.hobby,
+        info2.race,
+        info2.input_log,
+        info2.output_log,
+        info2.new_num_response
     )
