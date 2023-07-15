@@ -4,7 +4,7 @@
 # MonsLan_backendの使い方
 以下ではローカルでの実行手順を記載します。
 
-まず本レポジトリのクローンをお願いします。
+まず本レポジトリのクローンをお願いします。<br>
 `git clone https://github.com/Yoh-lab/MonsLabo_backend`
 
 次に本プロジェクト直下に以下の`.env`ファイルが必要になります。<br>
@@ -27,3 +27,7 @@ Mac/Linuxの場合 `source env/bin/activate`
 
 - 実行テスト（コマンド実行後のテスト方法などはFastAPIのドキュメントを調べてください。）<br>
 `uvicorn app:app --reload`
+
+## [MonsLab_frontend](https://github.com/Yoh-lab/MonsLabo_frontend)に関して
+本プロジェクトで実装したAPIを利用したWebアプリケーションとなります。<br>
+（そちらの使用方法などは向こうのREADME参照）
