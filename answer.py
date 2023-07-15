@@ -10,7 +10,7 @@ openai.api_key = OPENAI_API_KEY
 #
 def generate_answer(name, age, sex, hobby, race, input_log, output_log, new_num_response):
     # 1回目のレスポンス生成
-    if new_num_response == 0:
+    if new_num_response == 0 or new_num_response == '0':
         # ChatGPTに対するプロンプトの設定
         res = openai.ChatCompletion.create(
             model="gpt-3.5-turbo",
@@ -103,7 +103,7 @@ def generate_answer(name, age, sex, hobby, race, input_log, output_log, new_num_
         # レスポンスを返す
         return res["choices"][0]["message"]["content"]
     # 2回目のレスポンス生成
-    elif new_num_response == 1:
+    elif new_num_response == 1  or new_num_response == '1':
         # ChatGPTに対するプロンプトの設定
         res = openai.ChatCompletion.create(
             model="gpt-3.5-turbo",
@@ -204,7 +204,7 @@ def generate_answer(name, age, sex, hobby, race, input_log, output_log, new_num_
         # レスポンスを返す
         return res["choices"][0]["message"]["content"]
     # 3回目以降のレスポンス生成
-    elif new_num_response >= 2:
+    else:
         # ChatGPTに対するプロンプトの設定
         res = openai.ChatCompletion.create(
             model="gpt-3.5-turbo",
