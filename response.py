@@ -7,6 +7,13 @@ load_dotenv('.env')
 OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
 openai.api_key = OPENAI_API_KEY
 
+# コロンを削除する処理
+def remove_colon(text):
+    index = text.find(':')
+    if index != -1:
+        text = text[index+1:]
+    return text
+
 #
 def generate_response(name, age, sex, hobby, race, input_log, output_log, num_response):
     # 1回目のレスポンス生成
@@ -55,8 +62,10 @@ def generate_response(name, age, sex, hobby, race, input_log, output_log, num_re
                 }
             ]
         )
+        #
+        ans = remove_colon(res["choices"][0]["message"]["content"])
         # レスポンスを返す
-        return res["choices"][0]["message"]["content"]
+        return ans
     # 2回目のレスポンス生成
     elif num_response == 1 or num_response == '1':
         # ChatGPTに対するプロンプト指定
@@ -112,8 +121,10 @@ def generate_response(name, age, sex, hobby, race, input_log, output_log, num_re
                 }
             ]
         )
+        #
+        ans = remove_colon(res["choices"][0]["message"]["content"])
         # レスポンスを返す
-        return res["choices"][0]["message"]["content"]
+        return ans
     # 3回目のレスポンス生成
     elif num_response == 2 or num_response == '2':
         # ChatGPTに対するプロンプト指定
@@ -177,8 +188,10 @@ def generate_response(name, age, sex, hobby, race, input_log, output_log, num_re
                 }
             ]
         )
+        #
+        ans = remove_colon(res["choices"][0]["message"]["content"])
         # レスポンスを返す
-        return res["choices"][0]["message"]["content"]
+        return ans
     # 4回目のレスポンス生成
     elif num_response == 3 or num_response == '3':
         # ChatGPTに対するプロンプト指定
@@ -250,8 +263,10 @@ def generate_response(name, age, sex, hobby, race, input_log, output_log, num_re
                 }
             ]
         )
+        #
+        ans = remove_colon(res["choices"][0]["message"]["content"])
         # レスポンスを返す
-        return res["choices"][0]["message"]["content"]
+        return ans
     # 5回目のレスポンス生成
     elif num_response == 4 or num_response == '4':
         # ChatGPTに対するプロンプト指定
@@ -330,8 +345,10 @@ def generate_response(name, age, sex, hobby, race, input_log, output_log, num_re
                 }
             ]
         )
+        #
+        ans = remove_colon(res["choices"][0]["message"]["content"])
         # レスポンスを返す
-        return res["choices"][0]["message"]["content"]
+        return ans
 
 """
 if __name__ == "__main__":

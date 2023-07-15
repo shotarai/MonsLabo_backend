@@ -7,6 +7,13 @@ load_dotenv('.env')
 OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
 openai.api_key = OPENAI_API_KEY
 
+# コロンを削除する処理
+def remove_colon(text):
+    index = text.find(':')
+    if index != -1:
+        text = text[index+1:]
+    return text
+
 #
 def generate_feedback(name, age, sex, hobby, race, input_log, output_log):
     # ChatGPTに対するプロンプトの設定
@@ -99,8 +106,10 @@ def generate_feedback(name, age, sex, hobby, race, input_log, output_log):
             }
         ]
     )
-    # レスポンスを返す
-    return res["choices"][0]["message"]["content"]
+        #
+        ans = remove_colon(res["choices"][0]["message"]["content"])
+        # レスポンスを返す
+        return ans
 
 """
 if __name__ == "__main__":
