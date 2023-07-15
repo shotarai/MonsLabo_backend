@@ -7,7 +7,7 @@
 まず本レポジトリのクローンをお願いします。
 `git clone https://github.com/Yoh-lab/MonsLabo_backend`
 
-次に本プロジェクト直下に以下の`.env`ファイルが必要になります。
+次に本プロジェクト直下に以下の`.env`ファイルが必要になります。<br>
 （OpenAIのAPIキーが必要となるため、各自で取得をお願いします。）
 ```
 OPENAI_API_KEY=
