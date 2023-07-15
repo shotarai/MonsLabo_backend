@@ -106,10 +106,10 @@ def generate_feedback(name, age, sex, hobby, race, input_log, output_log):
             }
         ]
     )
-        #
-        ans = remove_colon(res["choices"][0]["message"]["content"])
-        # レスポンスを返す
-        return ans
+    #
+    ans = remove_colon(res["choices"][0]["message"]["content"])
+    # レスポンスを返す
+    return ans
 
 """
 if __name__ == "__main__":
