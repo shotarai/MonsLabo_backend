@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
+from typing import Union
 
 from response import generate_response
 from feedback import generate_feedback
@@ -19,18 +20,18 @@ app.add_middleware(
 # モンスターに関する情報など
 class Info(BaseModel):
     name: str
-    age: int
+    age: Union[int, str]
     sex: str
     hobby: str
     race: str
     input_log: list
     output_log: list
-    num_response: int
+    num_response: Union[int, str]
 
 # モンスターとの会話ログ
 class Log(BaseModel):
     name: str
-    age: int
+    age: Union[int, str]
     sex: str
     hobby: str
     race: str
@@ -40,13 +41,13 @@ class Log(BaseModel):
 #
 class Info2(BaseModel):
     name: str
-    age: int
+    age: Union[int, str]
     sex: str
     hobby: str
     race: str
     input_log: list
     output_log: list
-    new_num_response: int
+    new_num_response: Union[int, str]
 
 # テスト
 @app.get('/')
