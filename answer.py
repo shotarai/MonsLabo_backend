@@ -99,7 +99,8 @@ def generate_answer(name, age, sex, hobby, race, input_log, output_log, new_num_
                 {   
                     "role": "user",
                     "content": f"""
-                                ユーザと{name}のここまでの会話をもとに、
+                                ユーザと{name}のここまでの会話から、
+                                今まで真似してきた区長や性格に基づいて
                                 改めてユーザとの会話を行ってください。
                                 
                                 -ユーザからの発言：{input_log[5]}
@@ -194,7 +195,8 @@ def generate_answer(name, age, sex, hobby, race, input_log, output_log, new_num_
                 {   
                     "role": "user",
                     "content": f"""
-                                ユーザと{name}のここまでの会話をもとに、
+                                ユーザと{name}のここまでの会話から、
+                                今まで真似してきた区長や性格に基づいて
                                 改めてユーザとの会話を行ってください。
                                 
                                 -ユーザからの発言：{input_log[5]}
@@ -297,7 +299,8 @@ def generate_answer(name, age, sex, hobby, race, input_log, output_log, new_num_
                 {   
                     "role": "user",
                     "content": f"""
-                                ユーザと{name}のここまでの会話をもとに、
+                                ユーザと{name}のここまでの会話から、
+                                今まで真似してきた区長や性格に基づいて
                                 改めてユーザとの会話を行ってください。
                                 
                                 -ユーザからの発言：{input_log[-3]}
