@@ -1,6 +1,5 @@
-from fastapi import FastAPI, HTTPException, Response
+from fastapi import FastAPI, Response, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
 from typing import Union
 
@@ -83,8 +82,24 @@ def return_answer(trained: Trained):
 @app.post('/image')
 def return_image(info: Info):
     #
-    img = generate_image(info.description)
+    byte_image = generate_image(info.description)
     try:
-        return Response(content=img, media_type="/image/png")
+        return Response(content=byte_image, media_type="image/png")
     except:
         raise HTTPException(status_code=500, detail="Could not process image.")
+
+import numpy as np
+import matplotlib.pyplot as plt
+import io
+
+@app.post('/test')
+def test(info: Info):
+    if info.description == "test":
+        x = np.linspace(-10, 10, 400)
+        y = x
+        plt.figure(figsize=(8, 8))
+        plt.xlabel('x', color='#1C2833')
+        plt.ylabel('y', color='#1C2833')
+        png_output = io.BytesIO()
+        png_output.seek(0)
+        return Response(content=png_output, media_type="/image/png")

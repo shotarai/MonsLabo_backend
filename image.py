@@ -39,7 +39,6 @@ def generate_image(description):
                 )
             if artifact.type == generation.ARTIFACT_IMAGE:
                 byte_image = io.BytesIO(artifact.binary)
-                byte_image.seek(0)
 
     return byte_image
 

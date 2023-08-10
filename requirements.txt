@@ -1,4 +1,6 @@
 fastapi
+matplotlib
+numpy
 openai
 pillow
 pydantic
