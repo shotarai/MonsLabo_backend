@@ -1,11 +1,11 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, File, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import Union
 
-from response import generate_response
-from feedback import generate_feedback
 from answer import generate_answer
+from response import generate_response
+from stable import generate_image
 
 app = FastAPI()
 
@@ -17,8 +17,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# モンスターに関する情報など
-class Info(BaseModel):
+# モンスター育成時の情報
+class Training(BaseModel):
     name: str
     age: Union[int, str]
     sex: str
@@ -28,18 +28,8 @@ class Info(BaseModel):
     output_log: list
     num_response: Union[int, str]
 
-# モンスターとの会話ログ
-class Log(BaseModel):
-    name: str
-    age: Union[int, str]
-    sex: str
-    hobby: str
-    race: str
-    input_log: list
-    output_log: list
-
-#
-class Info2(BaseModel):
+# モンスター育成後の情報
+class Trained(BaseModel):
     name: str
     age: Union[int, str]
     sex: str
@@ -49,51 +39,58 @@ class Info2(BaseModel):
     output_log: list
     new_num_response: Union[int, str]
 
+# モンスターの基本情報
+class Info(BaseModel):
+    name: str
+    age: Union[int, str]
+    sex: str
+    hobby: str
+    race: str
+
 # テスト
 @app.get('/')
 def test():
     return {'Hello': 'World!!!!'}
 
-# 与えられた情報からレスポンスを生成
+# モンスター育成中の状態で返答を生成
 @app.post('/response')
-def return_response(info: Info):
+def return_response(training: Training):
     # 
     return generate_response(
+        training.name,
+        training.age,
+        training.sex,
+        training.hobby,
+        training.race,
+        training.input_log,
+        training.output_log,
+        training.num_response
+    )
+
+# モンスター育成後の状態で返答を生成
+@app.post('/answer')
+def return_answer(trained: Trained):
+    #
+    return generate_answer(
+        trained.name,
+        trained.age,
+        trained.sex,
+        trained.hobby,
+        trained.race,
+        trained.input_log,
+        trained.output_log,
+        trained.new_num_response
+    )
+
+# 
+@app.post('/stable')
+def return_stable(info: Info, file: UploadFile=File(...)):
+    #
+    return generate_image(
+        file.filename,
         info.name,
         info.age,
         info.sex,
         info.hobby,
-        info.race,
-        info.input_log,
-        info.output_log,
-        info.num_response
-    )
-
-# 会話のログからフィードバックを生成
-@app.post('/feedback')
-def return_feedback(log: Log):
-    # 
-    return generate_feedback(
-        log.name,
-        log.age,
-        log.sex,
-        log.hobby,
-        log.race,
-        log.input_log,
-        log.output_log,
-    )
-
-# 会話のログから一問一答を生成
-@app.post('/answer')
-def return_answer(info2: Info2):
-    #
-    return generate_answer(
-        info2.name,
-        info2.age,
-        info2.sex,
-        info2.hobby,
-        info2.race,
-        info2.input_log,
-        info2.output_log,
-        info2.new_num_response
-    )
+        info.race
+    )   

@@ -1,5 +1,7 @@
 fastapi
 openai
+pillow
 pydantic
 python-dotenv
+stability-sdk
 uvicorn
