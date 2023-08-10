@@ -1,11 +1,12 @@
-from fastapi import FastAPI, File, UploadFile
+from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
 from typing import Union
 
 from answer import generate_answer
 from response import generate_response
-from stable import generate_image
+from image import generate_image
 
 app = FastAPI()
 
@@ -39,13 +40,9 @@ class Trained(BaseModel):
     output_log: list
     new_num_response: Union[int, str]
 
-# モンスターの基本情報
+# モンスターの説明
 class Info(BaseModel):
-    name: str
-    age: Union[int, str]
-    sex: str
-    hobby: str
-    race: str
+    description: str
 
 # テスト
 @app.get('/')
@@ -83,14 +80,11 @@ def return_answer(trained: Trained):
     )
 
 # 
-@app.post('/stable')
-def return_stable(info: Info, file: UploadFile=File(...)):
+@app.post('/image')
+def return_image(info: Info):
     #
-    return generate_image(
-        file.filename,
-        info.name,
-        info.age,
-        info.sex,
-        info.hobby,
-        info.race
-    )   
+    img = generate_image(info.description)
+    try:
+        return StreamingResponse(img, media_type="image/png")
+    except:
+        raise HTTPException(status_code=500, detail="Could not process image.")

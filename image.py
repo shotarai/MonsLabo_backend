@@ -14,26 +14,19 @@ STABILITY_API_KEY = os.getenv('STABILITY_API_KEY')
 stability_api = client.StabilityInference(
     key=STABILITY_API_KEY,
     verbose=True,
-    engine="stable-diffusion-xl-1024-v0-9", 
+    engine="stable-diffusion-xl-1024-v1-0", 
 )
 
-def generate_image(filename, name, age, sex, hobby, race):
-    
-    img = Image.open(filename)
-    resized_img = img.resize((512, 512))
-
+def generate_image(description):
+    #
     res = stability_api.generate(
-        prompt=f"""
-                この{name}というキャラクターを以下の情報をもとに超リアルに描いてください。
-                年齢：{age}、性別：{sex}、趣味：{hobby}、種族：{race}
-                """,
-        init_image=resized_img,
-        start_schedule=0.8,
+        prompt=description,
         seed=123463446,
         steps=50,
         cfg_scale=8.0,
         width=1024,
         height=1024,
+        samples=1,
         sampler=generation.SAMPLER_K_DPMPP_2M
     )
 
@@ -45,11 +38,12 @@ def generate_image(filename, name, age, sex, hobby, race):
                     "Please modify the prompt and try again.")
             if artifact.type == generation.ARTIFACT_IMAGE:
                 global img2
-                img2 = Image.open(io.BytesIO(artifact.binary))
-                img2.save("a.png")
+                #img2 = Image.open(io.BytesIO(artifact.binary))
+                #img2.save("output.png")
+                img2 = io.BytesIO(artifact.binary)
 
     return img2
 
+
 if __name__ == "__main__":
-    filename = "D:\MonsLabo_backend\Anime_shibainu-640x640.png"
-    generate_image(filename, "ライアン", 10, "男", "筋トレ", "星の妖精")
+    generate_image("浴衣を着ている星の王子さま")
