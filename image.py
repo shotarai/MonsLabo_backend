@@ -35,14 +35,15 @@ def generate_image(description):
             if artifact.finish_reason == generation.FILTER:
                 warnings.warn(
                     "Your request activated the API's safety filters and could not be processed."
-                    "Please modify the prompt and try again.")
+                    "Please modify the prompt and try again."
+                )
             if artifact.type == generation.ARTIFACT_IMAGE:
-                global byte_image
                 byte_image = io.BytesIO(artifact.binary)
                 byte_image.seek(0)
 
     return byte_image
 
-
+"""
 if __name__ == "__main__":
     generate_image("浴衣を着ている星の王子さま")
+"""
