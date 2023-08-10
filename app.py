@@ -1,5 +1,6 @@
 from fastapi import FastAPI, HTTPException, Response
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
 from typing import Union
 
@@ -84,6 +85,6 @@ def return_image(info: Info):
     #
     img = generate_image(info.description)
     try:
-        return Response(content=img, media_type="image/png")
+        return Response(content=img, media_type="/image/png")
     except:
         raise HTTPException(status_code=500, detail="Could not process image.")
