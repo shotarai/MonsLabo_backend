@@ -43,7 +43,6 @@ def generate_image(description):
 
     return byte_image
 
-"""
+
 if __name__ == "__main__":
     generate_image("浴衣を着ている星の王子さま")
-"""

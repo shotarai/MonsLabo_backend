@@ -85,6 +85,6 @@ def return_image(info: Info):
     #
     img = generate_image(info.description)
     try:
-        return StreamingResponse(img, media_type="image/png")
+        return StreamingResponse(content=img, media_type="image/png")
     except:
         raise HTTPException(status_code=500, detail="Could not process image.")
