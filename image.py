@@ -37,13 +37,13 @@ def generate_image(description):
                     "Your request activated the API's safety filters and could not be processed."
                     "Please modify the prompt and try again.")
             if artifact.type == generation.ARTIFACT_IMAGE:
-                global img2
-                #img2 = Image.open(io.BytesIO(artifact.binary))
-                #img2.save("output.png")
-                img2 = io.BytesIO(artifact.binary)
+                global byte_image
+                byte_image = io.BytesIO(artifact.binary)
+                byte_image.seek(0)
 
-    return img2
+    return byte_image
 
-
+"""
 if __name__ == "__main__":
     generate_image("浴衣を着ている星の王子さま")
+"""
